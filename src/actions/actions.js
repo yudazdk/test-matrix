@@ -25,3 +25,13 @@ export function addTask(dispatch, taskName) {
         dispatch({type: ActionTypes.LOAD_TASKS, tasks: response.data});
     });
 }
+
+export function deleteTask(dispatch, id) {
+    Axios({
+        url: apiUrl + '/deleteTask.php',
+        method: 'post',
+        params: {id}
+    }).then( response => {
+        dispatch({type: ActionTypes.LOAD_TASKS, tasks: response.data});
+    });
+}

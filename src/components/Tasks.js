@@ -6,6 +6,7 @@ import '../css/todo.css';
 import TaskHeader from './TaskHeader';
 import TasksTableHead from './TasksTableHead';
 import TaskItem from './TaskItem';
+import TaskEditItem from './TaskEditItem';
 import AddTaskModal from './AddTaskModal';
 
 import * as TaskActions from '../actions/actions';
@@ -24,6 +25,10 @@ class Tasks extends React.Component {
     componentDidMount() {
         TaskActions.loadTasks(this.props.dispatch);
     }
+
+    deleteTask = (id) => {
+        TaskActions.deleteTask(this.props.dispatch, id);
+    };
 
     addTask = (name) => {
         TaskActions.addTask(this.props.dispatch, name);
@@ -51,7 +56,11 @@ class Tasks extends React.Component {
 
     renderTasks() {
         return this.props.tasks.map( (task, index) => {
-            return <TaskItem key={task.id} taskItem={task}/>;
+            if ( task.editMode ) {
+                return <TaskEditItem key={task.id} taskItem={task}/>;
+            } else {
+                return <TaskItem key={task.id} taskItem={task} deleteTask={this.deleteTask}/>;
+            }
         });
     }
 

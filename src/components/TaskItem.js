@@ -1,7 +1,7 @@
 import React from 'react';
 
 const TaskItem = (props) => {
-    const {taskItem} = props;
+    const {taskItem, deleteTask} = props;
 
     function convertDate() {
         let dateArr =  taskItem.created_at.split(' ');
@@ -12,12 +12,37 @@ const TaskItem = (props) => {
         return taskItem.is_completed === '1' ? 'task-completed' : '';
     }
 
+    function enableEditing() {
+
+    }
+
+    function deleteTaskItem() {
+        deleteTask(taskItem.id)
+    }
+
+    function renderButtons() {
+        return (
+            [
+            <button key={0} type="button" className="btn btn-success btn-xs"
+                    title="ערוך"
+                    onClick={enableEditing.bind(this)}>
+                <i className="fa fa-pencil-square-o"/>
+            </button>,
+            <button key={1} type="button" className="btn btn-danger btn-xs"
+                title="מחק"
+                onClick={deleteTaskItem.bind(this)}>
+                <i className="fa fa-trash-o"/>
+            </button>
+        ]
+        );
+    }
+
     return (
         <tr>
             <td>{taskItem.id}</td>
             <td className={getClass()}>{taskItem.name}</td>
             <td>{convertDate()}</td>
-            <td>{'\u00A0'}</td>
+            <td>{renderButtons()}</td>
         </tr>
     );
 };

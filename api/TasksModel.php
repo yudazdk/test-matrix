@@ -21,9 +21,12 @@ class tasksModel extends \Database
     }
 
     public function addTask($name) {
-        $this->db->prepare('INSERT INTO ' . $this->table . "(name) VALUES(:name)" );
         $statement = $this->db->prepare('INSERT INTO ' . $this->table . ' (name) VALUES (:name)');
-
         $statement->execute(['name' => $name]);
+    }
+
+    public function deleteTask($id) {
+        $statement = $this->db->prepare('DELETE FROM ' . $this->table . ' WHERE id = ?');
+        $statement->execute(array($id));
     }
 } ?>
