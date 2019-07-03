@@ -1,7 +1,7 @@
 import React from 'react';
 
 const TaskItem = (props) => {
-    const {taskItem, deleteTask} = props;
+    const {taskItem, enableEditing, deleteTask} = props;
 
     function convertDate() {
         let dateArr =  taskItem.created_at.split(' ');
@@ -12,8 +12,8 @@ const TaskItem = (props) => {
         return taskItem.is_completed === '1' ? 'task-completed' : '';
     }
 
-    function enableEditing() {
-
+    function enableEditingItem(id) {
+        enableEditing(taskItem.id);
     }
 
     function deleteTaskItem() {
@@ -25,7 +25,7 @@ const TaskItem = (props) => {
             [
             <button key={0} type="button" className="btn btn-success btn-xs"
                     title="ערוך"
-                    onClick={enableEditing.bind(this)}>
+                    onClick={enableEditingItem.bind(this)}>
                 <i className="fa fa-pencil-square-o"/>
             </button>,
             <button key={1} type="button" className="btn btn-danger btn-xs"

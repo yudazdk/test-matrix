@@ -1,15 +1,15 @@
 import React from 'react';
 
 const TaskEditItem = (props) => {
-    const {taskItem} = props;
+    const {taskItem, disableEditing} = props;
 
     function convertDate() {
         let dateArr =  taskItem.created_at.split(' ');
         return dateArr[0].split('-').reverse().join('-') + ' ' + dateArr[1];
     }
 
-    function disableEditing() {
-
+    function disableEditingItem() {
+        disableEditing(taskItem.id);
     }
 
     function editTask() {
@@ -22,12 +22,12 @@ const TaskEditItem = (props) => {
                 <button type="button" className="btn btn-success btn-xs"
                         title="ערוך"
                         onClick={editTask.bind(this)}>
-                    <i className="fa fa-pencil-square-o"/>
+                    <i className="fa fa-floppy-o"/>
                 </button>,
                 <button type="button" className="btn btn-danger btn-xs"
                         title="מחק"
-                        onClick={disableEditing.bind(this)}>
-                    <i className="fa fa-trash-o"/>
+                        onClick={disableEditingItem.bind(this)}>
+                    <i className="fa fa-times"/>
                 </button>
             ]
         );
@@ -38,9 +38,9 @@ const TaskEditItem = (props) => {
             <td>{taskItem.id}</td>
             <td>{taskItem.name}</td>
             <td>{convertDate()}</td>
-            <td>{'\u00A0'}</td>
+            <td>{renderButtons()}</td>
         </tr>
     );
 };
 
-export default TaskEditItem.js;
+export default TaskEditItem;

@@ -26,6 +26,14 @@ class Tasks extends React.Component {
         TaskActions.loadTasks(this.props.dispatch);
     }
 
+    disableEditing = (id) => {
+        this.props.dispatch({type: TaskActions.ActionTypes.DISABLE_EDITING, id});
+    };
+
+    enableEditing = (id) => {
+        this.props.dispatch({type: TaskActions.ActionTypes.ENABLE_EDITING, id});
+    };
+
     deleteTask = (id) => {
         TaskActions.deleteTask(this.props.dispatch, id);
     };
@@ -57,9 +65,9 @@ class Tasks extends React.Component {
     renderTasks() {
         return this.props.tasks.map( (task, index) => {
             if ( task.editMode ) {
-                return <TaskEditItem key={task.id} taskItem={task}/>;
+                return <TaskEditItem key={task.id} taskItem={task} disableEditing={this.disableEditing}/>;
             } else {
-                return <TaskItem key={task.id} taskItem={task} deleteTask={this.deleteTask}/>;
+                return <TaskItem key={task.id} taskItem={task} deleteTask={this.deleteTask} enableEditing={this.enableEditing}/>;
             }
         });
     }

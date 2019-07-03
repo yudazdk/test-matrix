@@ -1,8 +1,10 @@
 import Axios from 'axios';
 
 export const ActionTypes = {
-    ADD_TASK: 'ADD_TASK',
-    LOAD_TASKS: 'LOAD_TASKS'
+    LOAD_TASKS: 'LOAD_TASKS',
+
+    ENABLE_EDITING: 'ENABLE_EDITING',
+    DISABLE_EDITING: 'DISABLE_EDITING'
 };
 
 export const apiUrl = 'http://localhost/test-matrix/api';
