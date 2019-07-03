@@ -18,6 +18,16 @@ export async function  loadTasks(dispatch) {
     }
 }
 
+export function editTask(dispatch, taskFields) {
+    Axios({
+        url: apiUrl + '/editTask.php',
+        method: 'post',
+        params: taskFields
+    }).then( response => {
+        dispatch({type: ActionTypes.LOAD_TASKS, tasks: response.data});
+    });
+}
+
 export function addTask(dispatch, taskName) {
     Axios({
         url: apiUrl + '/addtask.php',

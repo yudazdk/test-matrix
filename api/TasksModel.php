@@ -29,4 +29,14 @@ class tasksModel extends \Database
         $statement = $this->db->prepare('DELETE FROM ' . $this->table . ' WHERE id = ?');
         $statement->execute(array($id));
     }
+
+    public function editTask($fields) {
+        $id = $fields['id'];
+        $name = $fields['name'];
+        $is_completed = $fields['is_completed'];
+
+        $sql = "UPDATE tasks SET name=?, is_completed=? WHERE id=?";
+        $stmt= $this->db->prepare($sql);
+        $stmt->execute([$name, $is_completed, $id]);
+    }
 } ?>
