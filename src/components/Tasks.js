@@ -25,6 +25,12 @@ class Tasks extends React.Component {
         TaskActions.loadTasks(this.props.dispatch);
     }
 
+    addTask = (name) => {
+        TaskActions.addTask(this.props.dispatch, name);
+
+        this.hideAddModal();
+    };
+
     hideAddModal = () => {
         let addModal = this.state.addModal;
         addModal.show = false;
@@ -69,7 +75,7 @@ class Tasks extends React.Component {
                     <button onClick={this.showAddModal} className="btn btn-primary">Add Task</button>
                 </div>
 
-                <AddTaskModal show={state.addModal.show} hideAddModal={this.hideAddModal}/>
+                <AddTaskModal show={state.addModal.show} hideAddModal={this.hideAddModal} addTask={this.addTask}/>
             </React.Fragment>
         );
     }

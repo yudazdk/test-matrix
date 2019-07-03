@@ -15,3 +15,13 @@ export async function  loadTasks(dispatch) {
         console.log(error);
     }
 }
+
+export function addTask(dispatch, taskName) {
+    Axios({
+        url: apiUrl + '/addtask.php',
+        method: 'post',
+        params: {name: taskName}
+    }).then( response => {
+        dispatch({type: ActionTypes.LOAD_TASKS, tasks: response.data});
+    });
+}
