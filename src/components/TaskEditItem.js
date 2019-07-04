@@ -37,7 +37,7 @@ class TaskEditItem extends React.Component {
         return (
             [
                 <button key={0} type="button" className="btn btn-success btn-xs"
-                        title="שמור"
+                        title="שמור" disabled={this.disabledButton}
                         onClick={this.editTask.bind(this)}>
                     <i className="fa fa-floppy-o"/>
                 </button>,
@@ -50,8 +50,20 @@ class TaskEditItem extends React.Component {
         );
     }
 
+    validateForm() {
+        this.disabledButton = false;
+        this.inputStyle = {};
+
+        if ( this.state.name.length === 0 ) {
+            this.disabledButton = true;
+            this.inputStyle = {borderColor: "#cc0000"};
+        }
+    }
+
     render() {
         const {taskItem} = this.props;
+
+        this.validateForm();
 
         return (
             <tr>
@@ -70,7 +82,7 @@ class TaskEditItem extends React.Component {
                     <div className="form-group row">
                         <label htmlFor="name" className="col-md-3"> Completed: </label>
                         <input type="checkbox" checked={this.state.is_completed === '1'}
-                               onChange={this.changeIsCompleted}/>
+                               style={this.inputStyle} onChange={this.changeIsCompleted}/>
                     </div>
                 </td>
                 <td>{this.renderButtons()}</td>
